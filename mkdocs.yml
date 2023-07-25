@@ -32,6 +32,7 @@ repo_name: 'pimidi-docs'
 repo_url: 'https://github.com/BlokasLabs/pimidi-docs/'
 markdown_extensions:
   - admonition
+  - attr_list
   - pymdownx.details
   - toc:
       permalink: '#'
