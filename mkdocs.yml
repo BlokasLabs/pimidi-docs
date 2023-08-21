@@ -1,41 +1,41 @@
-docs_dir: 'docs'
-site_dir: 'static'
+docs_dir: "docs"
+site_dir: "static"
 site_name: Pimidi Documentation
 site_author: UAB VILNIAUS BLOKAS
-google_analytics: ['UA-44135535-1', 'auto']
+google_analytics: ["UA-44135535-1", "auto"]
 use_directory_urls: true
 theme:
-  name: 'material'
-  favicon: 'favicon.ico'
-  logo: 'images/logo.svg'
+  name: "material"
+  favicon: "favicon.ico"
+  logo: "images/logo.svg"
   palette:
-    primary: 'white'
-    accent: 'white'
-  custom_dir: 'blokas-docs-theme'
+    primary: "white"
+    accent: "white"
+  custom_dir: "blokas-docs-theme"
 site_url: https://blokas.io/pimidi/docs/
 extra:
   ads:
-    pisound: true
+    pisound: false
     patchboxos: false
     midihub: false
     modep: false
-  discourse: 'https://community.blokas.io/'
-  disqus: 'fake'
+  discourse: "https://community.blokas.io/"
+  disqus: "fake"
   social:
-    - type: 'github'
-      link: 'https://github.com/BlokasLabs'
-    - type: 'twitter'
-      link: 'https://twitter.com/blokaslabs'
-    - type: 'facebook'
-      link: 'https://www.facebook.com/blokaslabs/'
-repo_name: 'pimidi-docs'
-repo_url: 'https://github.com/BlokasLabs/pimidi-docs/'
+    - type: "github"
+      link: "https://github.com/BlokasLabs"
+    - type: "twitter"
+      link: "https://twitter.com/blokaslabs"
+    - type: "facebook"
+      link: "https://www.facebook.com/blokaslabs/"
+repo_name: "pimidi-docs"
+repo_url: "https://github.com/BlokasLabs/pimidi-docs/"
 markdown_extensions:
   - admonition
   - attr_list
   - pymdownx.details
   - toc:
-      permalink: '#'
+      permalink: "#"
   - pymdownx.arithmatex
   - pymdownx.betterem
   - pymdownx.caret
@@ -50,12 +50,14 @@ markdown_extensions:
   - pymdownx.tasklist
   - pymdownx.tilde
   - footnotes:
-      PLACE_MARKER: '///Footnotes Go Here///'
+      PLACE_MARKER: "///Footnotes Go Here///"
 
-copyright: '&copy; 2023 VILNIAUS BLOKAS UAB'
+copyright: "&copy; 2023 VILNIAUS BLOKAS UAB"
 
 nav:
-- Getting Started: index.md
+  - Getting Started: index.md
+  - Advanced Configuration: configuration.md
+  - Detailed Specs: specs.md
 
 plugins:
   - search
