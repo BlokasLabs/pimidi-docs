@@ -111,7 +111,7 @@ Using higher baud rates will result in a very slightly lower latency. Other rate
 
 ### Firmware Upgrade
 
-If there's ever a need to know more about your Pimidi board and upgrade the firmware, there's `pm-util` program available on [Blokas APT server](https://apt.blokas.io/){target=_blank}, here's how to add the APT server:
+If there's ever a need to know more about your Pimidi board and upgrade the firmware, there's `pm-util` program available on [Blokas APT Server](https://apt.blokas.io/){target=_blank}, here's how to add the APT server:
 
 ```
 curl https://blokas.io/apt-setup.sh | sh
@@ -154,18 +154,18 @@ Any new firmware releases get announced on our forums: [https://community.blokas
 
 ## Detailed Specs
 
-| Parameter | Value |
-| --------- | ----- |
-| MIDI Inputs | 2 |
-| MIDI Outputs | 2 |
+| Parameter               | Value                              |
+| ----------------------- | ---------------------------------- |
+| MIDI Inputs             | 2                                  |
+| MIDI Outputs            | 2                                  |
 | Input/Output Connectors | 4x 3.5mm stereo jack (MIDI Type A) |
-| MIDI Loopback Latency | 1.3ms |
-| Minimum I²C Baud Rate | 100kHz |
-| Maximum I²C Baud Rate | 3.0MHz |
-| Activity LEDs | Input & Output on each port |
-| Current Draw | 50mA @ 5.1VDC |
-| Dimensions | 58mm x 65mm x 18.5mm |
-| Weight | 50g |
+| MIDI Loopback Latency   | 1.3ms                              |
+| Minimum I²C Baud Rate   | 100kHz                             |
+| Maximum I²C Baud Rate   | 3.0MHz                             |
+| Activity LEDs           | 4                                  |
+| Current Draw            | 50mA @ 5.1VDC                      |
+| Dimensions              | 58mm x 65mm x 18.5mm               |
+| Weight                  | 50g                                |
 
 ### GPIO Pins used
 
