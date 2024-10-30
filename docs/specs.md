@@ -9,8 +9,10 @@
 | Input/Output Connectors | 4x 3.5mm stereo jack (MIDI Type A) |
 | MIDI Loopback Latency   | 1.3ms                              |
 | Minimum I²C Baud Rate   | 100kHz                             |
-| Maximum I²C Baud Rate   | 3.0MHz                             |
+| Maximum I²C Baud Rate   | 3.4MHz                             |
 | Activity LEDs           | 4                                  |
+| Input LED Color         | Orange                             |
+| Output LED Color        | Yellow                             |
 | Current Draw            | 50mA @ 5.1VDC                      |
 | Dimensions              | 58mm x 65mm x 18.5mm               |
 | Weight                  | 50g                                |
@@ -25,18 +27,14 @@ Pimidi make use of the following GPIO pins:
 | GPIO03/SCL | 5          | I²C SCL       |
 | GPIO22     | 15         | Reset         |
 
-Additionally, one of the following pins is used, as selected by the *d\** jumper:
+Additionally, one of the following pins is used, as selected by the `sel` rotary switch:
 
-| Pin Name   | Pin Number | Closed Jumper |
-| ---------- | ---------- | ------------- |
-| GPIO17     | 11         | d0            |
-| GPIO27     | 13         | d1            |
-| GPIO23     | 16         | d2            |
-| GPIO24     | 18         | d3            |
-| GPIO25     | 22         | d4            |
-| GPIO05     | 29         | d5            |
-| GPIO06     | 31         | d6            |
-| GPIO12     | 32         | d7            |
+| Pin Name   | Pin Number | `sel` Position |
+| ---------- | ---------- | -------------- |
+| GPIO23     | 16         | 0 (default)    |
+| GPIO05     | 29         | 1              |
+| GPIO06     | 31         | 2              |
+| GPIO27     | 13         | 3              |
 
 ## Latency
 
