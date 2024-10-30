@@ -2,7 +2,6 @@ docs_dir: "docs"
 site_dir: "static"
 site_name: Pimidi Documentation
 site_author: UAB VILNIAUS BLOKAS
-google_analytics: ["UA-44135535-1", "auto"]
 use_directory_urls: true
 theme:
   name: "material"
@@ -12,6 +11,10 @@ theme:
     primary: "white"
     accent: "white"
   custom_dir: "blokas-docs-theme"
+  features:
+    - navigation.expand
+    - navigation.instant
+    - navigation.footer
 site_url: https://blokas.io/pimidi/docs/
 extra:
   ads:
@@ -22,12 +25,13 @@ extra:
   discourse: "https://community.blokas.io/"
   disqus: "fake"
   social:
-    - type: "github"
+    - icon: "fontawesome/brands/github"
       link: "https://github.com/BlokasLabs"
-    - type: "twitter"
+    - icon: "fontawesome/brands/x-twitter"
       link: "https://twitter.com/blokaslabs"
-    - type: "facebook"
+    - icon: "fontawesome/brands/facebook"
       link: "https://www.facebook.com/blokaslabs/"
+  homepage: "https://blokas.io/pimidi/"
 repo_name: "pimidi-docs"
 repo_url: "https://github.com/BlokasLabs/pimidi-docs/"
 markdown_extensions:
@@ -41,7 +45,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.mark
