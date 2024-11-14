@@ -57,12 +57,27 @@ markdown_extensions:
   - footnotes:
       PLACE_MARKER: "///Footnotes Go Here///"
 
-copyright: "&copy; 2023 VILNIAUS BLOKAS UAB"
+copyright: "&copy; 2024 VILNIAUS BLOKAS UAB"
 
 nav:
   - Getting Started: index.md
   - Advanced Configuration: configuration.md
   - Detailed Specs: specs.md
+  - Tutorials:
+    - ALSA: alsa.md
+    - Amidiminder: amidiminder.md
+    - Python: python.md
+    - Pure Data: puredata.md
 
 plugins:
   - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            docstring_style: sphinx
+            show_root_heading: false
+            show_root_toc_entry: false
+            heading_level: 4
+            show_bases: false
