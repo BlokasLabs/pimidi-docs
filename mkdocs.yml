@@ -66,7 +66,9 @@ nav:
   - Tutorials:
     - ALSA: alsa.md
     - Amidiminder: amidiminder.md
-    - Python: python.md
+    - Python:
+      - pimidipy Library: pimidipy.md
+      - pimidipy Reference: pimidipy-reference.md
     - Pure Data: puredata.md
 
 plugins:

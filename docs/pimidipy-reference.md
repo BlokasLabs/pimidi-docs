@@ -1,6 +1,8 @@
-# Python
+# pimidipy API Reference
 
-## pimidipy API Reference
+In this section you'll find the entire API Reference for the `pimidipy` library.
+
+## pimidipy Classes
 
 ### PimidiPy
 
