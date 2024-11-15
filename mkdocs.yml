@@ -72,6 +72,7 @@ nav:
 plugins:
   - search
   - mkdocstrings:
+      custom_templates: blokas-docs-theme/templates/mkdocstrings
       handlers:
         python:
           options:
