@@ -6,7 +6,15 @@
 
 ::: pimidipy.PimidiPy
 	options:
-		members: [__init__, open_input, open_output, drain_output, quit, run, parse_port_name]
+		members: [__init__, list_ports, resolve_port_name, open_input, open_output, drain_output, quit, run]
+
+### PortDirection
+
+::: pimidipy.PortDirection
+
+### PortInfo
+
+::: pimidipy.PortInfo
 
 ### InputPort
 
