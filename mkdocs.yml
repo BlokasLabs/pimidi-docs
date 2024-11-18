@@ -66,10 +66,10 @@ nav:
   - Tutorials:
     - ALSA: alsa.md
     - Amidiminder: amidiminder.md
-    - Python:
+    - Pure Data: puredata.md
+    - Python pimidipy:
       - pimidipy Library: pimidipy.md
       - pimidipy Reference: pimidipy-reference.md
-    - Pure Data: puredata.md
 
 plugins:
   - search
