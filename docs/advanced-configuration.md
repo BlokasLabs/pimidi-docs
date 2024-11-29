@@ -1,5 +1,28 @@
 # Advanced Configuration
 
+## Manual System Setup
+
+The device driver can be loaded at runtime by executing `sudo dtoverlay pimidi sel=0` command in a terminal. (change the `0` into the `sel` switch's current position if needed. You have to run this command for every Pimidi in your stack with appropriate `sel` values)
+
+To get the driver loaded automatically on system startup, edit your `/boot/firmware/config.txt` file as the root user within the `[all]` section at the bottom, add the following lines:
+
+```
+dtparam=i2c_arm=on,i2c_arm_baudrate=1000000
+dtoverlay=pimidi,sel=0
+```
+
+Change the `sel=` value as needed. Add multiple `dtoverlay=pimidi,sel=...` lines for every Pimidi in your stack.
+
+??? "Editing Files as Root User"
+
+    Some files are protected and not editable by regular users, here's one way to edit them as `root`, run this command in a terminal:
+
+    `sudo nano /boot/firmware/config.txt`
+
+    Use the keyboard arrows, page up, page down buttons, etc... to navigate around the text, apply the necessary text changes. Then hit **Ctrl+X**, then **Y** to exit and save your changes. If instead of **Y** you press **N**, the changes will get discarded.
+
+Reboot the system for changes to take effect (`sudo reboot`)
+
 ## Changing the Address & Data Pin
 
 In most cases, you don't even have to worry about changing the `sel` position on Pimidi and stick to the factory default 0, but changing the configuration is useful when using multiple Pimidi boards stacked together, or combining with other boards or external circuitry.
@@ -51,7 +74,7 @@ If the I²C bus is used with other I²C devices than Pimidi, check their specifi
 dtparam=i2c_arm=on,i2c_arm_baudrate=1000000
 ```
 
-For use with Pimidi, the following baud rates are recommended:
+Depending on the Pimidi stack size, the following minimum baud rates are recommended:
 
 | Baud Rate | Stack Size (Up To) |
 | --------- | ------------------ |
@@ -59,49 +82,4 @@ For use with Pimidi, the following baud rates are recommended:
 | 400000    | 2                  |
 | 1000000   | 4                  |
 
-Using higher baud rates will result in a very slightly lower latency. Other rates are possible, 3.4MHz is the absolute limit for Pimidi. Not all Raspberry Pi models are capable of baud rates above 1MHz.
-
-## Firmware Upgrade
-
-Upgrading the firmware of your Pimidi board is possible via the `pm-util` program available on [Blokas APT Server](https://apt.blokas.io/){target=_blank}, here's how to add the APT server:
-
-```
-curl https://blokas.io/apt-setup.sh | sh
-```
-
-Then install the program by running:
-
-```
-sudo apt-get install pm-util
-```
-
-Check `pm-util --help` for up to date usage:
-
-```
-pm-util usage:
-
-    pm-util [--sel id] --flash  <firmware.bin>
-    pm-util            --hash   <firmware.bin>
-    pm-util [--sel id] --verify <firwmare.bin>
-    pm-util [--sel id] --read-hash
-    pm-util [--sel id] --read-serial
-    pm-util [--sel id] --read-bootloader-version
-    pm-util [--sel id] --read-firmware-version
-    pm-util [--sel id] --read-hwrev
-
-    --sel <id>                  Device id, as selected by the rotary selector (factory default: 0)
-    --flash  <firmware.bin>     Flash firmware
-    --hash   <firmware.bin>     Print CRC32 hash of the firmware file
-    --verify <firmware.bin>     Verify the checksum of the firmware file and the device memory contents
-    --read-hash                 Read CRC32 hash of the firmware in the device
-    --read-serial               Read serial number
-    --read-bootloader-version   Read bootloader version
-    --read-firmware-version     Read firmware version
-    --read-hwrev                Read hardware revision
-    --help                      Print this help
-    --version                   Print version
-
-pm-util version 1.0.0 © Blokas https://blokas.io/
-```
-
-Any new firmware releases get announced on our forums: [https://community.blokas.io/](https://community.blokas.io/){target=_blank}
+Using higher baud rates will result in a very slightly lower latency. Other rates are possible. 3.4MHz is the absolute limit for Pimidi. Not all Raspberry Pi models are capable of baud rates above 1MHz.

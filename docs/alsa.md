@@ -37,7 +37,7 @@ If you have a 2nd Pimidi board with `sel` set to 3, you can use `hw:pimidi3,0,0`
 
 ### RawMIDI Pimidi Identifiers
 
-Here are all the possible Pimidi RawMIDI persistent identifiers:
+Here is a list of all possible Pimidi RawMIDI persistent identifiers:
 
 | `sel` Position | RawMIDI Identifier for Port A | RawMIDI Identifier for Port B |
 | -------------- | ----------------------------- | ----------------------------- |
@@ -146,6 +146,17 @@ client 32: 'pimidi1' [type=kernel,card=4]
 Based on this output, we can see the `28:0` and `28:1` addresses are referring to Pimidi's (with `sel=0`) A and B ports, as well as `32:0` and `32:1` are referring to Pimidi's (with `sel=1`) A and B ports. However, there's no guarantees that the assigned Client ID will be the same after a system restart or even within the same session, especially for removable devices, such as USB MIDI controllers. Therefore, as ALSA Sequencer also accepts text names, the most stable way to refer to the device is using identifiers like `pimidi0:0` for Pimidi's port A and `pimidi0:1` for port B.
 
 Furthermore, when using a Client Name, ALSA actually treats it as a prefix - it does not have to be an exact match, it's enough to match partially. For example, using `pimidi:1` would match `pimidi0:1` port as well. If the prefix matches multiple clients, one of them gets picked.
+
+### ALSA Sequencer Pimidi Identifiers
+
+Here is a list of all possible ALSA Sequencer Pimidi persistent identifiers:
+
+| `sel` Position | ALSA Seq Identifier for Port A | ALSA Seq Identifier for Port B |
+| -------------- | ------------------------------ | ------------------------------ |
+| 0              | `pimidi0:0`                    | `pimidi0:1`                    |
+| 1              | `pimidi1:0`                    | `pimidi1:1`                    |
+| 2              | `pimidi2:0`                    | `pimidi2:1`                    |
+| 3              | `pimidi3:0`                    | `pimidi3:1`                    |
 
 ### Managing the MIDI Connection Graph
 

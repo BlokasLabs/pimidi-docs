@@ -6,32 +6,23 @@ Pimidi makes use of a minimal set of GPIO pins, and duplicates all of the 40 GPI
 
 ## Hardware Setup
 
-Simply power off your Raspberry Pi or compatible SBC, mount the Pimidi on top of it. Adjust the `sel` position if desired and make note of its current position. The `sel` default is 0.
+Simply power off your Raspberry Pi or compatible SBC, mount the Pimidi on top of it. Adjust the `sel` position if desired and make note of its current position. The default `sel` value is 0. You may want to pick other `sel` values when stacking multiple Pimidi boards or to make it use an alternative set of GPIO pins. See [here](advanced-configuration.md) for more on this.
 
 // todo: extender instructions
 
-Power up your system.
+Power up your system and continue with the Software setup below.
 
 ## Software Setup
 
-The device driver can be loaded at runtime by executing `sudo dtoverlay pimidi sel=0` command in a terminal. (change the `0` into the `sel` switch's current position if needed)
-
-To get the driver loaded automatically on system startup, edit your `/boot/firmware/config.txt` file as the root user within the `[all]` section at the bottom, add the following lines:
+To install the Pimidi software on Debian compatible distributions like <a href="https://www.raspberrypi.org/downloads/raspberry-pi-os/" target="_blank">Raspberry Pi OS</a>, open a terminal (command) window and run:
 
 ```
-dtoverlay=pimidi,sel=0
-dtparam=i2c_arm=on,i2c_arm_baudrate=1000000
+curl https://blokas.io/pimidi/install.sh | sh
 ```
 
-??? "Editing Files as Root User"
+This will set up the Blokas APT server, install all the software packages for Pimidi, scan for connected Pimidis, load the kernel module, and make the changes in `config.txt` so the Pimidis are ready to go every time the system starts.
 
-    Some files are protected and not editable by regular users, here's one way to edit them as `root`, run this command in a terminal:
-
-    `sudo nano /boot/config.txt`
-
-    Use the keyboard arrows, page up, page down buttons, etc... to navigate around the text, apply the necessary text changes. Then hit **Ctrl+X**, then **Y** to exit and save your changes. If instead of **Y** you press **N**, the changes will get discarded.
-
-Reboot the system for changes to take effect (`sudo reboot`)
+**Note:** It can also be used for updating the software or update the `config.txt` if the number of boards or `sel` positions changed.
 
 ## Verifying It Works
 

@@ -1,4 +1,4 @@
-# Python pimidipy
+# Python pimidipy Library
 
 ## Introduction
 
@@ -6,11 +6,15 @@ If you'd visit the homepage of [Python](https://python.org/){target=_blank}, you
 
 To make it as smooth as possible, we've created the `pimidipy` library which makes processing MIDI data a breeze!
 
+We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) to run your scripts in the background automatically, but executing your scripts on your own will work just fine as well.
+
 ## pimidipy Library
 
 `pimidipy` library makes interacting with MIDI devices through Python extremely simple, while it takes care of all the low level details for you. On this page we'll walk you through the setup and basic usage of the library.
 
 For more detailed information on various classes, types and methods, take a glance at the [pimidipy Reference](pimidipy-reference.md) page.
+
+For some sample scripts, see the `pimidipy-scripts` [repository](https://github.com/BlokasLabs/pimidipy-scripts/){target=_blank}.
 
 ### Setup
 
@@ -18,9 +22,9 @@ First things first, we must have the `pimidipy` library installed and ready to g
 
 #### Via APT
 
-This method is the one for making `pimidipy` available system-wide.
+This method is the one for making `pimidipy` available system-wide. Run:
 
-Run `sudo apt install -y python3-pimidipy`.
+`sudo apt install -y python3-pimidipy`
 
 #### Via PIP
 
@@ -63,6 +67,8 @@ Then you may run it like this:
 
 #### Listing MIDI Ports
 
+If using pimidipy as a Patchbox Module, we recommend using `utils.get_input_port(...)` and `utils.get_output_port(...)` as described [here](pimidipy-patchbox-module.md#configuring-pimidipy-ports), as it allows the ports to be overridden through a configuration file.
+
 The PimidiPy class has a `list_ports` method that gives us an iterable list of ports currently available:
 
 ```py3
@@ -91,6 +97,8 @@ for removable devices, such as USB MIDI controllers. Therefore, as ALSA Sequence
 device is using identifiers like `pimidi0:0` for Pimidi's port A and `pimidi0:1` for port B.
 
 Furthermore, when using a Client Name, ALSA actually treats it as a prefix - it does not have to be an exact match, it's enough to match partially. For example, using `pimidi:1` would match `pimidi0:1` port as well. If the prefix matches multiple clients, one of them gets picked.
+
+See also: [Configuring pimidipy Ports](pimidipy-patchbox-module.md#configuring-pimidipy-ports)
 
 #### Outputting One-Off MIDI Data
 

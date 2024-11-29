@@ -61,14 +61,15 @@ copyright: "&copy; 2024 VILNIAUS BLOKAS UAB"
 
 nav:
   - Getting Started: index.md
-  - Advanced Configuration: configuration.md
+  - Advanced Configuration: advanced-configuration.md
   - Detailed Specs: specs.md
   - Tutorials:
     - ALSA: alsa.md
     - Amidiminder: amidiminder.md
     - Pure Data: puredata.md
     - Python pimidipy:
-      - pimidipy Library: pimidipy.md
+      - pimidipy Patchbox Module: pimidipy-patchbox-module.md
+      - pimidipy Library: pimidipy-library.md
       - pimidipy Reference: pimidipy-reference.md
 
 plugins:
