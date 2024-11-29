@@ -113,6 +113,8 @@ with pimidipy.open_output("pimidi0:1") as output:
 	output.write(ProgramChangeEvent(channel=0, program=20))
 ```
 
+<small>__Note:__ prefer using `utils.get_output_port(...)` instead of hardcoding the name string if using the Patchbox module.</small>
+
 This will send a ProgramChange event to Pimidi `sel=0` output port B on Channel 1, Program Number 20. Note that the channel numbers are expected to be within 0 - 15 range, they refer to channels 1 - 16 as seen on MIDI devices and software.
 
 #### Forwarding MIDI Data Between Ports
@@ -137,6 +139,8 @@ input.add_callback(forward)
 
 pimidipy.run()
 ```
+
+<small>__Note:__ prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 The `forward` function will get called any time a MIDI event is received on the input.
 
@@ -163,6 +167,8 @@ input.add_callback(discard_non_note_events)
 
 pimidipy.run()
 ```
+
+<small>__Note:__ prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 #### Producing a Chord
 
@@ -201,5 +207,7 @@ input.add_callback(partial(produce_chord, semitones=[0, 4, 7]))
 
 pimidipy.run()
 ```
+
+<small>__Note:__ prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 You may get different kinds of chords playing by modifying the `semitones` argument.
