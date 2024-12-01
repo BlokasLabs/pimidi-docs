@@ -29,7 +29,6 @@ The sample pimidipy scripts use `utils.get_input_port(x)` and `utils.get_output_
 | `2`       | `pimidi1:0`        | `6`       | `pimidi3:0`        |
 | `3`       | `pimidi1:1`        | `7`       | `pimidi3:1`        |
 
-
 Using ID number higher than 7 will result in an exception raised, unless there's an override for that number in `/etc/pimidipy.conf`.
 
 If we'd want to use `pimidi2:1` input instead of `pimidi0:0` input and use `pimidi1:1` output instead of `pimidi0:0` output, we can add these lines to `/etc/pimidipy.conf`:

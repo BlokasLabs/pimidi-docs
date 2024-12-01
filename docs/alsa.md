@@ -82,7 +82,7 @@ patch@patchbox:~ $ amidi -p hw:pimidi0,0,0 -S "90 3C 64"
 patch@patchbox:~ $ amidi -p hw:pimidi0,0,0 -S "80 3C 00"
 ```
 
-Here's how to interpret the Hex bytes we just sent - most MIDI messages consist of up to 3 bytes. The length (and message type) is determined by the very first digi, in this case, `9` is the Note On, and `8` is the Note Off. Both of these messages are 3 bytes in length. The next digit is usually the MIDI Channel number. In this case, `0` - `F` indicate MIDI channels 1 - 16. Then 2 data bytes follow, they must be between `00` and `7F` (0 and 127 decimal). The first data byte, `3C`, is decimal 60 encoded as a hex number, and it represents the Note Number in the case of Note On and Note Off messages. The second data byte, `64`, is decimal 100 encoded as a hex number, and it represents the Note Velocity.
+Here's how to interpret the Hex bytes we just sent - most MIDI messages consist of up to 3 bytes. The length (and message type) is determined by the very first digit, in this case, `9` is the Note On, and `8` is the Note Off. Both of these messages are 3 bytes in length. The next digit is usually the MIDI Channel number. In this case, `0` - `F` indicate MIDI channels 1 - 16. Then 2 data bytes follow, they must be between `00` and `7F` (0 and 127 decimal). The first data byte, `3C`, is decimal 60 encoded as a hex number, and it represents the Note Number in the case of Note On and Note Off messages. The second data byte, `64`, is decimal 100 encoded as a hex number, and it represents the Note Velocity.
 
 Familiarizing yourself with the [Summary of MIDI Messages](https://midi.org/summary-of-midi-1-0-messages){target=_blank} table is very helpful to be able to inspect and type out raw MIDI messages.
 

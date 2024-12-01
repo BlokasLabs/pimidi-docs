@@ -1,5 +1,7 @@
 # Detailed Specs
 
+Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Attached on Top (HAT) specification. It features 2 MIDI inputs and outputs using 3.5mm stereo jacks (MIDI Type A), and utilizes standard GPIO pins for communication. With a low average roundtrip latency of around 1.3ms at a 3MHz I²C baud rate, Pimidi is suitable for real-time MIDI applications. This document provides detailed specifications, GPIO pin usage, and latency performance to assist in integrating Pimidi into your projects.
+
 ## General Info
 
 | Parameter               | Value                              |
@@ -14,12 +16,12 @@
 | Input LED Color         | Orange                             |
 | Output LED Color        | Yellow                             |
 | Current Draw            | 50mA @ 5.1VDC                      |
-| Dimensions              | 58mm x 65mm x 18.5mm               |
+| Dimensions              | 65mm x 56mm x 18.5mm               |
 | Weight                  | 50g                                |
 
 ## GPIO Pins Used
 
-Pimidi make use of the following GPIO pins:
+Pimidi makes use of the following GPIO pins:
 
 | Pin Name   | Pin Number | Usage         |
 | ---------- | ---------- | ------------- |
@@ -27,7 +29,7 @@ Pimidi make use of the following GPIO pins:
 | GPIO03/SCL | 5          | I²C SCL       |
 | GPIO22     | 15         | Reset         |
 
-Additionally, one of the following pins is used, as selected by the `sel` rotary switch:
+Additionally, *one* of the following pins is used, as selected by the `sel` rotary switch, for the Data Ready line:
 
 | Pin Name   | Pin Number | `sel` Position |
 | ---------- | ---------- | -------------- |
