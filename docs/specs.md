@@ -1,6 +1,6 @@
 # Detailed Specs
 
-Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Attached on Top (HAT) specification. It features 2 MIDI inputs and outputs using 3.5mm stereo jacks (MIDI Type A), and utilizes standard GPIO pins for communication. With a low average roundtrip latency of around 1.3ms at a 3MHz I²C baud rate, Pimidi is suitable for real-time MIDI applications. This document provides detailed specifications, GPIO pin usage, and latency performance to assist in integrating Pimidi into your projects.
+Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Attached on Top (HAT) specification. It features 2 MIDI inputs and outputs using 3.5mm stereo jacks (MIDI Type A), and utilizes standard GPIO pins for communication. With a low average roundtrip latency of around 1.3ms at a 1MHz I²C baud rate, Pimidi is suitable for real-time MIDI applications. This document provides detailed specifications, GPIO pin usage, and latency performance to assist in integrating Pimidi into your projects.
 
 ## General Info
 
@@ -15,9 +15,9 @@ Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Att
 | Activity LEDs           | 4                                  |
 | Input LED Color         | Orange                             |
 | Output LED Color        | Yellow                             |
-| Current Draw            | 50mA @ 5.1VDC                      |
-| Dimensions              | 65mm x 56mm x 18.5mm               |
-| Weight                  | 50g                                |
+| Current Draw            | 22mA @ 5.1VDC                      |
+| Dimensions              | 65mm x 58.5mm x 18.5mm             |
+| Weight                  | 21g                                |
 
 ## GPIO Pins Used
 
@@ -40,71 +40,88 @@ Additionally, *one* of the following pins is used, as selected by the `sel` rota
 
 ## Latency
 
-On average, the roundtrip latency, which is the measure of a Note On message going from software through ALSA sequencer, the driver, firmware to physical data output and back all the way to the receiving port, the firmware, the driver, the ALSA sequencer and the software program is around **1.3ms** (if I²C baud rate is set to 3MHz) and **1.4ms** (if I²C baud rate is set to 400kHz). More detailed test results by [`alsa-midi-latency-test`](https://github.com/koppi/alsa-midi-latency-test){target=_blank} program:
+On average, the roundtrip latency, which is the measure of a 3 byte Note On message going from software through ALSA sequencer, the driver, firmware to physical data output and back all the way to the receiving port, the firmware, the driver, the ALSA sequencer and the software program is around **1.3ms** (if I²C baud rate is set to 1MHz). More detailed test results by [`alsa-midi-latency-test`](https://github.com/koppi/alsa-midi-latency-test){target=_blank} program:
 
-??? "3MHz I²C Baud Rate Test Results"
+??? "1MHz I²C Baud Rate Test Results"
 
     ```
-    alsa-midi-latency-test -i pimidi:0 -o pimidi:0 -R -1
+    patch@patchbox:~ $ alsa-midi-latency-test -i pimidi0:0 -o pimidi0:0 -1
     > alsa-midi-latency-test 0.0.5
-    > running on Linux release 5.15.36-rt41-v7l+ (version #1 SMP PREEMPT_RT Mon May 9 12:16:02 EEST 2022) on armv7l
-    > set_realtime_priority(SCHED_FIFO, 99).. done.
+    > running on Linux release 6.6.63-v8-16k+ (version #1821 SMP PREEMPT Mon Nov 25 13:51:58 GMT 2024) on aarch64
     > clock resolution: 0.000000001 s
-
+    
     > sampling 10000 midi latency values - please wait ...
     > press Ctrl+C to abort test
-
+    
     sample; latency_ms; latency_ms_worst
-         0;      1.306;      1.306
-       800;      1.451;      1.451
-      1440;      1.456;      1.456
-      3447;      1.674;      1.674
-
+         0;      1.281;      1.281
+      9999;      1.255;      1.281
     > done.
-
+    
     > latency distribution:
     ...
-      1.2 -  1.3 ms:     5667 ##################################################
-      1.3 -  1.4 ms:     4317 ######################################
-      1.4 -  1.5 ms:        7 #
-      1.5 -  1.6 ms:        5 #
-      1.6 -  1.7 ms:        3 #
-      1.7 -  1.8 ms:        1 #
-
+      1.2 -  1.3 ms:      434 ##
+      1.3 -  1.4 ms:     9566 ##################################################
+    
     > SUCCESS
-
+    
      best latency was 1.2 ms
      mean latency was 1.3 ms
-     worst latency was 1.7 ms, which is great.
+     worst latency was 1.3 ms, which is great.
 
     ```
 
 ??? "400kHz I²C Baud Rate Test Results"
 
     ```
-    alsa-midi-latency-test -i pimidi:0 -o pimidi:0 -R -1
+    patch@patchbox:~ $ alsa-midi-latency-test -i pimidi0:0 -o pimidi0:0 -1
     > alsa-midi-latency-test 0.0.5
-    > running on Linux release 5.15.36-rt41-v7l+ (version #1 SMP PREEMPT_RT Mon May 9 12:16:02 EEST 2022) on armv7l
-    > set_realtime_priority(SCHED_FIFO, 99).. done.
+    > running on Linux release 6.6.63-v8-16k+ (version #1821 SMP PREEMPT Mon Nov 25 13:51:58 GMT 2024) on aarch64
     > clock resolution: 0.000000001 s
-
+    
     > sampling 10000 midi latency values - please wait ...
     > press Ctrl+C to abort test
-
+    
     sample; latency_ms; latency_ms_worst
-         0;      1.585;      1.585
-
+         0;      1.430;      1.430
+      9999;      1.390;      1.430
     > done.
-
+    
     > latency distribution:
     ...
-      1.4 -  1.5 ms:     7678 ##################################################
-      1.5 -  1.6 ms:     2321 ###############
-      1.6 -  1.7 ms:        1 #
-
+      1.4 -  1.5 ms:    10000 ##################################################
+    
     > SUCCESS
-
+    
      best latency was 1.4 ms
      mean latency was 1.4 ms
-     worst latency was 1.6 ms, which is great.
+     worst latency was 1.4 ms, which is great.
+    ```
+
+??? "100kHz I²C Baud Rate Test Results"
+
+    ```
+    patch@patchbox:~ $ alsa-midi-latency-test -i pimidi0:0 -o pimidi0:0 -1
+    > alsa-midi-latency-test 0.0.5
+    > running on Linux release 6.6.63-v8-16k+ (version #1821 SMP PREEMPT Mon Nov 25 13:51:58 GMT 2024) on aarch64
+    > clock resolution: 0.000000001 s
+    
+    > sampling 10000 midi latency values - please wait ...
+    > press Ctrl+C to abort test
+    
+    sample; latency_ms; latency_ms_worst
+         0;      2.332;      2.332
+      9999;      2.273;      2.332
+    > done.
+    
+    > latency distribution:
+    ...
+      2.2 -  2.3 ms:     3037 ######################
+      2.3 -  2.4 ms:     6963 ##################################################
+    
+    > SUCCESS
+    
+     best latency was 2.2 ms
+     mean latency was 2.3 ms
+     worst latency was 2.3 ms, which is great.
     ```
