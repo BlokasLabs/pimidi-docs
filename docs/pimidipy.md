@@ -14,7 +14,9 @@ We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) t
 
 For more detailed information on various classes, types and methods, take a glance at the [pimidipy Reference](pimidipy-reference.md) page.
 
-For some sample scripts, see the `pimidipy-scripts` [repository](https://github.com/BlokasLabs/pimidipy-scripts/){target=_blank}.
+### Example Scripts
+
+For some example scripts, see the [Patchbox Module](pimidipy-patchbox-module.md#example-scripts) documentation.
 
 ### Setup
 
@@ -144,7 +146,7 @@ pimidipy.run()
 
 The `forward` function will get called any time a MIDI event is received on the input.
 
-#### Forwarding Only Note On and Off Events
+#### Discarding Events and Forwarding Only Note On and Off Events
 
 Now let's say we want to selectively forward the Note On and Note Off events, but discard the rest kinds of events, we may write a callback function such as this:
 

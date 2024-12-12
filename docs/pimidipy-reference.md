@@ -8,7 +8,7 @@ In this section you'll find the entire API Reference for the `pimidipy` library.
 
 ::: pimidipy.PimidiPy
 	options:
-		members: [__init__, list_ports, resolve_port_name, open_input, open_output, drain_output, quit, run]
+		members: [__init__, list_ports, resolve_port_name, get_port, get_input_port, get_output_port, open_input, open_output, drain_output, quit, run]
 
 ### PortDirection
 
@@ -22,13 +22,15 @@ In this section you'll find the entire API Reference for the `pimidipy` library.
 
 ::: pimidipy.InputPort
 	options:
-		members: [add_callback, remove_callback, close]
+		inherited_members: true
+		members: [name, is_input, is_output, add_callback, remove_callback, close]
 
 ### OutputPort
 
 ::: pimidipy.OutputPort
 	options:
-		members: [write, close]
+		inherited_members: true
+		members: [name, is_input, is_output, write, close]
 
 ## pimidipy Channel Events
 

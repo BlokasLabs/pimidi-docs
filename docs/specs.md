@@ -1,6 +1,6 @@
 # Detailed Specs
 
-Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Attached on Top (HAT) specification. It features 2 MIDI inputs and outputs using 3.5mm stereo jacks (MIDI Type A), and utilizes standard GPIO pins for communication. With a low average roundtrip latency of around 1.3ms at a 1MHz I²C baud rate, Pimidi is suitable for real-time MIDI applications. This document provides detailed specifications, GPIO pin usage, and latency performance to assist in integrating Pimidi into your projects.
+Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Attached on Top (HAT) specification. It features 2 MIDI inputs and outputs using 3.5mm stereo jacks (MIDI Type A), and utilizes standard GPIO pins for communication. With a low average roundtrip latency of around 1.28ms at a 1MHz I²C baud rate, Pimidi is suitable for real-time MIDI applications. This document provides detailed specifications, GPIO pin usage, and latency performance to assist in integrating Pimidi into your projects.
 
 ## General Info
 
@@ -9,7 +9,7 @@ Pimidi is a MIDI interface for the Raspberry Pi that adheres to the Hardware Att
 | MIDI Inputs             | 2                                  |
 | MIDI Outputs            | 2                                  |
 | Input/Output Connectors | 4x 3.5mm stereo jack (MIDI Type A) |
-| MIDI Loopback Latency   | 1.3ms                              |
+| MIDI Loopback Latency   | 1.28ms                             |
 | Minimum I²C Baud Rate   | 100kHz                             |
 | Maximum I²C Baud Rate   | 3.4MHz                             |
 | Activity LEDs           | 4                                  |
@@ -40,7 +40,7 @@ Additionally, *one* of the following pins is used, as selected by the `sel` rota
 
 ## Latency
 
-On average, the roundtrip latency, which is the measure of a 3 byte Note On message going from software through ALSA sequencer, the driver, firmware to physical data output and back all the way to the receiving port, the firmware, the driver, the ALSA sequencer and the software program is around **1.3ms** (if I²C baud rate is set to 1MHz). More detailed test results by [`alsa-midi-latency-test`](https://github.com/koppi/alsa-midi-latency-test){target=_blank} program:
+On average, the roundtrip latency, which is the measure of a 3 byte Note On message going from software through ALSA sequencer, the driver, firmware to physical data output and back all the way to the receiving port, the firmware, the driver, the ALSA sequencer and the software program is around **1.28ms** (if I²C baud rate is set to 1MHz). More detailed test results by [`alsa-midi-latency-test`](https://github.com/koppi/alsa-midi-latency-test){target=_blank} program:
 
 ??? "1MHz I²C Baud Rate Test Results"
 
