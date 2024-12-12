@@ -29,6 +29,8 @@ Pimidi makes use of the following GPIO pins:
 | GPIO03/SCL | 5          | I²C SCL       |
 | GPIO22     | 15         | Reset         |
 
+The I²C pins may be shared with other I²C devices.
+
 Additionally, *one* of the following pins is used, as selected by the `sel` rotary switch, for the Data Ready line:
 
 | Pin Name   | Pin Number | `sel` Position |

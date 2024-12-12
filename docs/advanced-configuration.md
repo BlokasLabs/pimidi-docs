@@ -2,7 +2,7 @@
 
 ## Manual System Setup
 
-The device driver can be loaded at runtime by executing `sudo dtoverlay pimidi sel=0` command in a terminal. (change the `0` into the `sel` switch's current position if needed. You have to run this command for every Pimidi in your stack with appropriate `sel` values)
+The device driver can be loaded at runtime by executing `sudo dtoverlay pimidi sel=0` command in a terminal. Change the `0` into the `sel` switch's current position if needed. You have to run this command for every Pimidi in your stack with appropriate `sel` values.
 
 To get the driver loaded automatically on system startup, edit your `/boot/firmware/config.txt` file as the root user within the `[all]` section at the bottom, add the following lines:
 

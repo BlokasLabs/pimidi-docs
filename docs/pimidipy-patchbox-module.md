@@ -2,7 +2,7 @@
 
 Our [Patchbox OS](https://blokas.io/patchbox-os/){target=_blank} is built around the concept of [modules](https://blokas.io/patchbox-os/docs/modules/){target=_blank}. They effortlessly make your setup do interesting things. One of those things is processing and controlling MIDI data with Python. For that purpose, we've developed the [`pimidipy`](pimidipy.md) Python library. This Patchbox module makes running the scripts automatically as smooth as possible.
 
-## Installing & Activating The pimidipy Module
+## Installing & Activating the pimidipy Module
 
 Installing or activating the module is very straightforward, simply run `patchbox`, navigate to `module` and select `pimidipy`.
 
@@ -14,45 +14,21 @@ To deactivate the module, select `none` instead of `pimidipy` or run `patchbox m
 
 The pimidipy scripts are located at `/var/pimidipy-scripts`. The root of the folder is for user scripts, while the `samples` subfolder contains example scripts (which you can run immediately). Every .py file in `/var/pimidipy-scripts` and `/var/pimidipy-scripts/samples` are listed when activating the module. You may copy files from the `samples` subfolder to the root folder to modify them (don't forget to re-activate the pimidipy module and point it to your own copy of the script)
 
-The `utils` subfolder contains a couple of common utility functions for use in pimidipy scripts.
-
 The active script gets restarted automatically every time `/var/pimidipy-scripts` contents get modified, even if the changes don't 'touch' the active script.
 
 ## Configuring pimidipy Ports
 
-The sample pimidipy scripts use `utils.get_input_port(x)` and `utils.get_output_port(x)` utility function for selecting the MIDI ports to work with. Those can be overridden without editing the scripts themselves in `/etc/pimidipy.conf` file. Based on the ID number (`x` argument) provided to the function, it returns one of these strings:
+The MIDI ports that the pimidipy module uses can be overridden by editing `/etc/pimidipy.conf`, see [here](pimidipy.md#configuring-pimidipy-ports) for more details.
 
-| ID Number | Returned Port Name | ID Number | Returned Port Name |
-| --------- | ------------------ | --------- | ------------------ |
-| `0`       | `pimidi0:0`        | `4`       | `pimidi2:0`        |
-| `1`       | `pimidi0:1`        | `5`       | `pimidi2:1`        |
-| `2`       | `pimidi1:0`        | `6`       | `pimidi3:0`        |
-| `3`       | `pimidi1:1`        | `7`       | `pimidi3:1`        |
-
-Using ID number higher than 7 will result in an exception raised, unless there's an override for that number in `/etc/pimidipy.conf`.
-
-If we'd want to use `pimidi2:1` input instead of `pimidi0:0` input and use `pimidi1:1` output instead of `pimidi0:0` output, we can add these lines to `/etc/pimidipy.conf`:
-
-```
-PORT_IN_0=pimidi2:1
-PORT_OUT_0=pimidi1:1
-```
-
-The changes in the currently active script take place every time the config file gets modified automatically.
-
-## Checking The Script Status and Output
+## Checking the Script Status and Output
 
 To check whether the script is running fine, use this command:
 
-```bash
-sudo systemctl status pimidipy.service
-```
+`systemctl status pimidipy.service`
 
 To check the script's output, run:
 
-```bash
-journalctl -u pimidipy.service
-```
+`journalctl -u pimidipy.service`
 
 Hit the 'End' key to go to the latest log lines. Click 'Q' to exit.
 
@@ -82,11 +58,9 @@ For better editing experience, install the Python extension. It's best to do it 
 
 To see live script output within Visual Studio code, open the Terminal tab (hit Ctrl + `). Run the following command:
 
-```bash
-journalctl -u pimidipy.service -f
-```
+`journalctl -u pimidipy.service -f`
 
-Hit Ctrl + C to exit the `journalctl ` command.
+Hit Ctrl + C to exit the `journalctl` command.
 
 ### Monitoring MIDI Events
 
@@ -104,9 +78,7 @@ The [`/var/pimidipy-scripts/samples/thru.py`](https://github.com/BlokasLabs/pimi
 
 The [`/var/pimidipy-scripts/samples/chord.py`](https://github.com/BlokasLabs/pimidipy-scripts/blob/main/samples/chord.py){target=_blank} script produces MIDI chords for every note played. By default it produces the major triad chord, but you customize it by setting the `CHORD_SEMITONES` environment variable to a comma separated list of positive or negative semitone numbers in `/etc/pimidipy.conf`. For example:
 
-```plain
-CHORD_SEMITONES=-12,0,3,7
-```
+`CHORD_SEMITONES=-12,0,3,7`
 
 ### CC Programmer for DX7
 

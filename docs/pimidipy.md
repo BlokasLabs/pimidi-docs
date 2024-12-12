@@ -6,7 +6,7 @@ If you'd visit the homepage of [Python](https://python.org/){target=_blank}, you
 
 To make it as smooth as possible, we've created the `pimidipy` library which makes processing MIDI data a breeze!
 
-We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) to run your scripts in the background automatically, but executing your scripts on your own will work just fine as well.
+We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) to run your scripts in the background automatically, but executing your scripts on their own will work just fine as well.
 
 ## pimidipy Library
 
@@ -20,11 +20,15 @@ For some example scripts, see the [Patchbox Module](pimidipy-patchbox-module.md#
 
 ### Setup
 
-First things first, we must have the `pimidipy` library installed and ready to go. If you have followed the Getting Started steps, chances are, you already have it set up via our APT server and may skip to the [next section](#basics).
+First things first, we must have the `pimidipy` library installed and ready to go. If you have followed the Getting Started steps, chances are, you already have `pimidipy` set up via our APT server and may skip to the [next section](#basics).
 
 #### Via APT
 
-This method is the one for making `pimidipy` available system-wide. Run:
+This method is the one for making `pimidipy` available system-wide. First make sure our APT server is set up:
+
+`curl https://blokas.io/apt-setup.sh | sh`
+
+Then to install the package, run:
 
 `sudo apt install -y python3-pimidipy`
 
@@ -57,21 +61,15 @@ This creates a global `pimidipy` instance which is our gateway from Python to th
 Once you save your script to a file with `.py` extension, you have to enable the 'execute' flag on your script.
 Assuming we've named the file as `pimidipy_example.py`, you can enable the flag using the following command, it's enough to do this once per file:
 
-```bash
-chmod +x pimidipy_example.py
-```
+`chmod +x pimidipy_example.py`
 
 Then you may run it like this:
 
-```bash
-./pmidipy_example.py
-```
+`./pmidipy_example.py`
 
 #### Listing MIDI Ports
 
-If using pimidipy as a Patchbox Module, we recommend using `utils.get_input_port(...)` and `utils.get_output_port(...)` as described [here](pimidipy-patchbox-module.md#configuring-pimidipy-ports), as it allows the ports to be overridden through a configuration file.
-
-The PimidiPy class has a `list_ports` method that gives us an iterable list of ports currently available:
+The [PimidiPy](pimidipy-reference.md#pimidipy) class has a [`list_ports`](pimidipy-reference.md#pimidipy.PimidiPy.list_ports) method that gives us an iterable list of ports currently available:
 
 ```py3
 #!/usr/bin/env python3
@@ -89,6 +87,8 @@ This script produces output like this:
 28:1 pimidi0 pimidi-b <PortDirection.BOTH: 3>
 ```
 
+Listing of ports is optional, as `pimidipy` provides a mechanism for getting default ports and overriding the ports without having to hardcode the port names in your script, see below sections for more on this.
+
 #### ALSA Sequencer MIDI Port Names
 
 ALSA Sequencer MIDI Port Names are made up of two parts - the Client Name/ID and the Port Name/ID separated by a colon (:).
@@ -100,7 +100,7 @@ device is using identifiers like `pimidi0:0` for Pimidi's port A and `pimidi0:1`
 
 Furthermore, when using a Client Name, ALSA actually treats it as a prefix - it does not have to be an exact match, it's enough to match partially. For example, using `pimidi:1` would match `pimidi0:1` port as well. If the prefix matches multiple clients, one of them gets picked.
 
-See also: [Configuring pimidipy Ports](pimidipy-patchbox-module.md#configuring-pimidipy-ports)
+See also: [Configuring pimidipy Ports](#configuring-pimidipy-ports)
 
 #### Outputting One-Off MIDI Data
 
@@ -115,9 +115,35 @@ with pimidipy.open_output("pimidi0:1") as output:
 	output.write(ProgramChangeEvent(channel=0, program=20))
 ```
 
-<small>__Note:__ Prefer using `utils.get_output_port(...)` instead of hardcoding the name string if using the Patchbox module.</small>
+<small>__Note:__ Prefer using `pimidipy.open_output(1)` or `pimidipy.get_output_port(1)` instead of hardcoding the name string, see the [below section](#configuring-pimidipy-ports).</small>
 
 This will send a ProgramChange event to Pimidi `sel=0` output port B on Channel 1, Program Number 20. Note that the channel numbers are expected to be within 0 - 15 range, they refer to channels 1 - 16 as seen on MIDI devices and software.
+
+#### Configuring pimidipy Ports
+
+Referring to MIDI ports by name in your scripts requires editing the script every time you want to remap the code to use a different set of ports. To avoid having to hardcode the MIDI port names into the scripts, `pimidipy` library offers a mechanism for default port names and overriding them through environment variables or `/etc/pimidipy.conf` file. The [PimidiPy](pimidipy-reference.md#pimidipy) class offers [`get_input_port`](pimidipy-reference.md#pimidipy.PimidiPy.get_input_port) and [`get_output_port`](pimidipy-reference.md#pimidipy.PimidiPy.get_output_port) static methods that take a 0 based positive integer number and return a string port name that can be used with the [`open_input`](pimidipy-reference.md#pimidipy.PimidiPy.open_input) and [`open_output`](pimidipy-reference.md#pimidipy.PimidiPy.open_output) methods. The `open_...` methods may take an integer ID directly for quicker access.
+
+By default, the ID number provided to the functions refer to these ports:
+
+| ID Number | Port Name   | ID Number | Port Name   |
+| --------- | ----------- | --------- | ----------- |
+| `0`       | `pimidi0:0` | `4`       | `pimidi2:0` |
+| `1`       | `pimidi0:1` | `5`       | `pimidi2:1` |
+| `2`       | `pimidi1:0` | `6`       | `pimidi3:0` |
+| `3`       | `pimidi1:1` | `7`       | `pimidi3:1` |
+
+Using ID number above 7 will result in an exception raised, unless there's an override for that number in `/etc/pimidipy.conf`.
+
+If we'd want to use `pimidi2:1` input instead of the default `pimidi0:0` input (ID 0) and use `pimidi1:1` output instead of the default `pimidi2:1` output (ID 5), we can add these lines to `/etc/pimidipy.conf`:
+
+```
+PORT_IN_0=pimidi2:1
+PORT_OUT_5=pimidi1:1
+```
+
+If using the pimidipy Patchbox Module, the currently active `pimidipy` script is automatically restarted every time there are changes in `/etc/pimidipy.conf`, so changes take effect immediately.
+
+See also: [ALSA Sequencer MIDI Port Names](#alsa-sequencer-midi-port-names)
 
 #### Forwarding MIDI Data Between Ports
 
@@ -130,19 +156,17 @@ and start the `pimidipy` main loop.
 from pimidipy import *
 pimidipy = PimidiPy()
 
-input = pimidipy.open_input("pimidi0:0")
-output = pimidipy.open_output("pimidi0:1")
+input = pimidipy.open_input(0)
+output = pimidipy.open_output(1)
 
 def forward(event):
-	print(f'Forwarding event {event}')
+	print(f'Forwarding event {event} from {input.name} to {output.name}')
 	output.write(event)
 
 input.add_callback(forward)
 
 pimidipy.run()
 ```
-
-<small>__Note:__ Prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 The `forward` function will get called any time a MIDI event is received on the input.
 
@@ -155,22 +179,20 @@ Now let's say we want to selectively forward the Note On and Note Off events, bu
 from pimidipy import *
 pimidipy = PimidiPy()
 
-input = pimidipy.open_input("pimidi0:0")
-output = pimidipy.open_output("pimidi0:1")
+input = pimidipy.open_input(0)
+output = pimidipy.open_output(0)
 
 def discard_non_note_events(event):
 	if type(event) in [NoteOnEvent, NoteOffEvent]:
-		print(f'Passing event {event} along.')
+		print(f'Passing event {event} from {input.name} along to {output.name}.')
 		output.write(event)
 	else:
-		print(f'Discarding event {event}')
+		print(f'Discarding event {event} from {input.name}')
 
 input.add_callback(discard_non_note_events)
 
 pimidipy.run()
 ```
-
-<small>__Note:__ Prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 #### Producing a Chord
 
@@ -182,12 +204,12 @@ from functools import partial
 from pimidipy import *
 pimidipy = PimidiPy()
 
-input = pimidipy.open_input("pimidi0:0")
-output = pimidipy.open_output("pimidi0:1")
+input = pimidipy.open_input(0)
+output = pimidipy.open_output(0)
 
 def produce_chord(event, semitones: list[int]):
 	if type(event) == NoteOnEvent:
-		print(f'Producing chord for {event}')
+		print(f'Producing chord for {event} from {input.name} to {output.name}')
 		for semitone in semitones:
 			output.write(NoteOnEvent(
 				event.channel,
@@ -195,7 +217,7 @@ def produce_chord(event, semitones: list[int]):
 				event.velocity)
 				)
 	elif type(event) == NoteOffEvent:
-		print(f'Producing note offs for {event}')
+		print(f'Producing note offs for {event} from {input.name} to {output.name}')
 		for semitone in semitones:
 			output.write(NoteOffEvent(
 				event.channel,
@@ -203,13 +225,11 @@ def produce_chord(event, semitones: list[int]):
 				event.velocity)
 				)
 	else:
-		print(f'Discarding event {event}')
+		print(f'Discarding event {event}  from {input.name}')
 
 input.add_callback(partial(produce_chord, semitones=[0, 4, 7]))
 
 pimidipy.run()
 ```
-
-<small>__Note:__ Prefer using `utils.get_input_port(...)` and `utils.get_output_port(...)` instead of hardcoding the name strings if using the Patchbox module.</small>
 
 You may get different kinds of chords playing by modifying the `semitones` argument.
