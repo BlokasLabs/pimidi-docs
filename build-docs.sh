@@ -11,6 +11,7 @@ mkdocs build
 
 echo "Removing mkdocs environment in /run/shm/mkdocs-pimidi"
 deactivate
-rm -rf /run/shm/mkdocs-pimidi
+
+#rm -rf /run/shm/mkdocs-pimidi
 
 echo "Done! Thank you!"
