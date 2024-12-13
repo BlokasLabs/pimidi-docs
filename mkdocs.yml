@@ -74,6 +74,7 @@ nav:
 
 plugins:
   - search
+  - macros
   - mkdocstrings:
       custom_templates: blokas-docs-theme/templates/mkdocstrings
       handlers:

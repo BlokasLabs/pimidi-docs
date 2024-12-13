@@ -8,21 +8,19 @@ To make it as smooth as possible, we've created the `pimidipy` library which mak
 
 We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) to run your scripts in the background automatically, but executing your scripts on their own will work just fine as well.
 
-## pimidipy Library
-
 `pimidipy` library makes interacting with MIDI devices through Python extremely simple, while it takes care of all the low level details for you. On this page we'll walk you through the setup and basic usage of the library.
 
 For more detailed information on various classes, types and methods, take a glance at the [pimidipy Reference](pimidipy-reference.md) page.
 
-### Example Scripts
+## Example Scripts
 
 For some example scripts, see the [Patchbox Module](pimidipy-patchbox-module.md#example-scripts) documentation.
 
-### Setup
+## Setup
 
 First things first, we must have the `pimidipy` library installed and ready to go. If you have followed the Getting Started steps, chances are, you already have `pimidipy` set up via our APT server and may skip to the [next section](#basics).
 
-#### Via APT
+### Via APT
 
 This method is the one for making `pimidipy` available system-wide. First make sure our APT server is set up:
 
@@ -32,7 +30,7 @@ Then to install the package, run:
 
 `sudo apt install -y python3-pimidipy`
 
-#### Via PIP
+### Via PIP
 
 For installing via [`pip`](https://pip.pypa.io/){target=_blank} (Package Installer for Python), you should use a Virtual Environment, which isolates the Python you run from the system-wide environment. If you haven't got one already, set up a Virtual Environment for your Python:
 
@@ -46,7 +44,7 @@ And finally, install the `pimidipy` library:
 
 `pip install --upgrade pimidipy`
 
-### Basics
+## Basics
 
 Every script you write, you'll want to start off with initializing the `pimidipy` library:
 
@@ -67,7 +65,7 @@ Then you may run it like this:
 
 `./pmidipy_example.py`
 
-#### Listing MIDI Ports
+### Listing MIDI Ports
 
 The [PimidiPy](pimidipy-reference.md#pimidipy) class has a [`list_ports`](pimidipy-reference.md#pimidipy.PimidiPy.list_ports) method that gives us an iterable list of ports currently available:
 
@@ -89,7 +87,7 @@ This script produces output like this:
 
 Listing of ports is optional, as `pimidipy` provides a mechanism for getting default ports and overriding the ports without having to hardcode the port names in your script, see below sections for more on this.
 
-#### ALSA Sequencer MIDI Port Names
+### ALSA Sequencer MIDI Port Names
 
 ALSA Sequencer MIDI Port Names are made up of two parts - the Client Name/ID and the Port Name/ID separated by a colon (:).
 
@@ -102,7 +100,7 @@ Furthermore, when using a Client Name, ALSA actually treats it as a prefix - it 
 
 See also: [Configuring pimidipy Ports](#configuring-pimidipy-ports)
 
-#### Outputting One-Off MIDI Data
+### Outputting One-Off MIDI Data
 
 You may produce MIDI events at will from your script, simply by using the `write` method on an OutputPort object:
 
@@ -119,7 +117,7 @@ with pimidipy.open_output("pimidi0:1") as output:
 
 This will send a ProgramChange event to Pimidi `sel=0` output port B on Channel 1, Program Number 20. Note that the channel numbers are expected to be within 0 - 15 range, they refer to channels 1 - 16 as seen on MIDI devices and software.
 
-#### Configuring pimidipy Ports
+### Configuring pimidipy Ports
 
 Referring to MIDI ports by name in your scripts requires editing the script every time you want to remap the code to use a different set of ports. To avoid having to hardcode the MIDI port names into the scripts, `pimidipy` library offers a mechanism for default port names and overriding them through environment variables or `/etc/pimidipy.conf` file. The [PimidiPy](pimidipy-reference.md#pimidipy) class offers [`get_input_port`](pimidipy-reference.md#pimidipy.PimidiPy.get_input_port) and [`get_output_port`](pimidipy-reference.md#pimidipy.PimidiPy.get_output_port) static methods that take a 0 based positive integer number and return a string port name that can be used with the [`open_input`](pimidipy-reference.md#pimidipy.PimidiPy.open_input) and [`open_output`](pimidipy-reference.md#pimidipy.PimidiPy.open_output) methods. The `open_...` methods may take an integer ID directly for quicker access.
 
@@ -145,7 +143,7 @@ If using the pimidipy Patchbox Module, the currently active `pimidipy` script is
 
 See also: [ALSA Sequencer MIDI Port Names](#alsa-sequencer-midi-port-names)
 
-#### Forwarding MIDI Data Between Ports
+### Forwarding MIDI Data Between Ports
 
 Let's say we want whatever MIDI message that arrives on the Pimidi's MIDI Input Port A to be sent out as is from the MIDI Output Port B.
 To achieve that, we must open the required ports by name and register a callback on the Input that will forward data to the Output
@@ -170,7 +168,7 @@ pimidipy.run()
 
 The `forward` function will get called any time a MIDI event is received on the input.
 
-#### Discarding Events and Forwarding Only Note On and Off Events
+### Discarding Events and Forwarding Only Note On and Off Events
 
 Now let's say we want to selectively forward the Note On and Note Off events, but discard the rest kinds of events, we may write a callback function such as this:
 
@@ -194,7 +192,7 @@ input.add_callback(discard_non_note_events)
 pimidipy.run()
 ```
 
-#### Producing a Chord
+### Producing a Chord
 
 Now that we know how to detect Note On and Note Off events, let's see how we can produce some modified events to produce a major chord:
 
