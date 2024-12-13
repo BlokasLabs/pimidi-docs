@@ -8,7 +8,7 @@ Pimidi makes use of a minimal set of GPIO pins, and duplicates all of the 40 GPI
 
 Simply power off your Raspberry Pi or compatible SBC, mount the Pimidi on top of it. Adjust the `sel` position if desired and make note of its current position. The default `sel` value is 0. You may want to pick other `sel` values when stacking multiple Pimidi boards or to make it use an alternative set of GPIO pins. See [here](advanced-configuration.md) for more on this.
 
-// todo: extender instructions
+// todo: extender instructions, and how to dismantle
 
 Power up your system and continue with the Software setup below.
 
