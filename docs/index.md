@@ -6,9 +6,37 @@ Pimidi makes use of a minimal set of GPIO pins, and duplicates all of the 40 GPI
 
 ## Hardware Setup
 
-Simply power off your Raspberry Pi or compatible SBC, mount the Pimidi on top of it. Adjust the `sel` position if desired and make note of its current position. The default `sel` value is 0. You may want to pick other `sel` values when stacking multiple Pimidi boards or to make it use an alternative set of GPIO pins. See [here](advanced-configuration.md) for more on this.
+Power off your Raspberry Pi or compatible SBC. Adjust the `sel` position of Pimidi if desired and make note of its current position. The default `sel` value is 0. You may want to pick other `sel` values when stacking multiple Pimidi boards or to make it use an alternative set of GPIO pins. See [here](advanced-configuration.md) for more on this.
 
-// todo: extender instructions, and how to dismantle
+### Assembling Pimidi
+
+To assemble your Pimidi, follow these steps using the included mounting parts kit, which contains:
+
+* 4 hex standoffs
+* 4 screws
+* 4 nuts
+
+### Step-by-Step Assembly:
+
+**1. Attach the Standoffs**
+
+Insert the male thread of each hex standoff from the bottom side of the Pimidi board.
+
+**2. Fix the Standoffs in Place**
+
+Secure each standoff to the topmost Pimidi board by using the corresponding nut. Tighten the nut onto the standoff to hold it in place.
+
+**3. Mount the Raspberry Pi**
+
+Take the screws and insert them from the bottom side of the Raspberry Pi.
+
+Screw them into the threaded ends of the Pimidi standoffs to secure the Raspberry Pi to the Pimidi.
+
+**4. Stacking Additional Pimidi Boards (Optional)**
+
+If you are stacking more than one Pimidi board, simply join the standoffs together to connect additional Pimidi units. Make sure to set the `sel` setting to a unique value for every Pimidi. Repeat the assembly steps for each added board.
+
+<small>**Note**: If you are stacking multiple Pimidi boards, you will have 4 screws and 4 nuts remaining as spare parts per unit, since only one set of screws and nuts is needed per stack.</small>
 
 Power up your system and continue with the Software setup below.
 
