@@ -1,5 +1,7 @@
 # Getting Started
 
+![Pimidi](images/pimidi-front.jpg)
+
 Pimidi is a compact and stackable 2x2 MIDI interface for Raspberry Pi and compatible Single Board Computers (SBCs). The 3.5mm stereo port jacks follow the MIDI standard (Type A) and can be used with DIN-5 MIDI cables via an adapter.
 
 Pimidi makes use of a minimal set of GPIO pins, and duplicates all of the 40 GPIO pins for easy access to integrate additional boards and external circuitry.
@@ -10,6 +12,8 @@ Power off your Raspberry Pi or compatible SBC. Adjust the `sel` position of Pimi
 
 ### Assembling Pimidi
 
+![Pimidi contents](images/pimidi-package.jpg)
+
 To assemble your Pimidi, follow these steps using the included mounting parts kit, which contains:
 
 * 4 hex standoffs
@@ -17,6 +21,8 @@ To assemble your Pimidi, follow these steps using the included mounting parts ki
 * 4 nuts
 
 ### Step-by-Step Assembly:
+
+![Pimidi and Raspberry Pi](images/pimidi-rpi.jpg)
 
 **1. Attach the Standoffs**
 
@@ -33,6 +39,8 @@ Take the screws and insert them from the bottom side of the Raspberry Pi.
 Screw them into the threaded ends of the Pimidi standoffs to secure the Raspberry Pi to the Pimidi.
 
 **4. Stacking Additional Pimidi Boards (Optional)**
+
+![Pimidi tower](images/pimidi-tower.jpg)
 
 If you are stacking more than one Pimidi board, simply join the standoffs together to connect additional Pimidi units. Make sure to set the `sel` setting to a unique value for every Pimidi. Repeat the assembly steps for each added board.
 
