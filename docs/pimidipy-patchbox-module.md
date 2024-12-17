@@ -1,4 +1,4 @@
-# Pimidipy Patchbox Module
+# pimidipy Patchbox Module
 
 Our [Patchbox OS](https://blokas.io/patchbox-os/){target=_blank} is built around the concept of [modules](https://blokas.io/patchbox-os/docs/modules/){target=_blank}. They effortlessly make your setup do interesting things. One of those things is processing and controlling MIDI data with Python. For that purpose, we've developed the [`pimidipy`](pimidipy.md) Python library. This Patchbox module makes running the scripts automatically as smooth as possible.
 

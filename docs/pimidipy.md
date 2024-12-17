@@ -4,7 +4,7 @@
 
 If you'd visit the homepage of [Python](https://python.org/){target=_blank}, you'd be greeted with a message saying "*Python is a programming language that lets you work quickly and integrate systems more effectively.*" Indeed - with just a few lines of code we can make it do wild things with MIDI.
 
-To make it as smooth as possible, we've created the `pimidipy` library which makes processing MIDI data a breeze!
+To make it as smooth as possible, we've created the `pimidipy` library which makes processing MIDI data a breeze! Originally developed for [Pimidi](https://blokas.io/pimidi/), the `pimidipy` library works seamlessly with all MIDI devices.
 
 We recommend using the pimidipy [Patchbox Module](pimidipy-patchbox-module.md) to run your scripts in the background automatically, but executing your scripts on their own will work just fine as well.
 
