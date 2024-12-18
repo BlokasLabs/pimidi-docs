@@ -6,6 +6,8 @@ Our [Patchbox OS](https://blokas.io/patchbox-os/){target=_blank} is built around
 
 Installing or activating the module is very straightforward, simply run `patchbox`, navigate to `module` and select `pimidipy`.
 
+<small>**Note**: No `pimidipy` option? Run `patchbox update` first!</small>
+
 Once installation is done, you'll be asked to select the script to start. The script you pick will get started in the background. It will also be started automatically after system restarts too, until the Patchbox Module is switched to another or deactivated altogether.
 
 To deactivate the module, select `none` instead of `pimidipy` or run `patchbox module deactivate`
