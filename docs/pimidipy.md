@@ -1,5 +1,7 @@
 # Python pimidipy Library
 
+![pimidipy](images/pimidipy_forward.png)
+
 ## Introduction
 
 If you'd visit the homepage of [Python](https://python.org/){target=_blank}, you'd be greeted with a message saying "*Python is a programming language that lets you work quickly and integrate systems more effectively.*" Indeed - with just a few lines of code we can make it do wild things with MIDI.
